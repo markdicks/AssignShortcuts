@@ -5,8 +5,64 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AssignShortcuts"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Device Shortcut Manager" Height="auto" MinHeight="400" Width="auto" MinWidth="600">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
 
+        <!-- Header -->
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                   Text="Device Shortcut Manager" 
+                   FontSize="24" 
+                   FontWeight="Bold" 
+                   HorizontalAlignment="Center"
+                   Margin="10"/>
+
+        <!-- Device List -->
+        <ListBox x:Name="DeviceListBox" 
+                 Grid.Row="1" 
+                 Grid.Column="0" 
+                 Margin="10" 
+                 SelectionChanged="DeviceListBox_SelectionChanged">
+            <ListBoxItem Content="Device 1"/>
+            <ListBoxItem Content="Device 2"/>
+            <ListBoxItem Content="Device 3"/>
+        </ListBox>
+
+        <!-- Shortcut Management Area -->
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="10">
+            <TextBlock Text="Shortcut Management" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,10"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Shortcut:" Width="100"/>
+                <TextBox x:Name="ShortcutTextBox" Width="200"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Action:" Width="100"/>
+                <TextBox x:Name="ActionTextBox" Width="200"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Button Content="Add" Width="100" Click="AddShortcut_Click"/>
+                <Button Content="Remove" Width="100" Click="RemoveShortcut_Click" Margin="10,0,0,0"/>
+                <Button Content="Update" Width="100" Click="UpdateShortcut_Click" Margin="10,0,0,0"/>
+            </StackPanel>
+
+            <ListView x:Name="ShortcutListView" Margin="0,10,0,0">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Shortcut" Width="150" DisplayMemberBinding="{Binding Shortcut}"/>
+                        <GridViewColumn Header="Action" Width="250" DisplayMemberBinding="{Binding Action}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
     </Grid>
 </Window>
